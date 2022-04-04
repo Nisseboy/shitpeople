@@ -1,25 +1,15 @@
-let sites = [
-  {name: "Cubefield", url: "https://totallyscience.co/assets/games/cubedodge.html"},
-  {name: "Getting over it", url: "https://scratch.mit.edu/projects/389464290/embed/"},
-  {name: "Google", url: "https://www.google.com/webhp?igu=1"},
-  {name: "The Final Earth 2", url: "https://florianvanstrien.nl/TheFinalEarth2/play/"}
-];
+let text = "464f5e0a59435e4f590a170a7151444b474f100a08695f484f4c434f464e08060a5f5846100a08425e5e5a591005055e455e4b4646535949434f44494f044945054b59594f5e59054d4b474f5905495f484f4e454e4d4f04425e474608570651444b474f100a086d4f5e5e43444d0a455c4f580a435e08060a5f5846100a08425e5e5a591005055949584b5e49420447435e044f4e5f055a5845404f495e59051912131e1c1e18131a054f47484f4e0508570651444b474f100a086d45454d464f08060a5f5846100a08425e5e5a591005055d5d5d044d45454d464f04494547055d4f48425a15434d5f171b08570651444b474f100a087e424f0a6c43444b460a6f4b585e420a1808060a5f5846100a08425e5e5a591005054c464558434b445c4b44595e58434f44044446057e424f6c43444b466f4b585e4218055a464b530508577711464f5e0a5a795e5843444d0a170a0808114c45580a02464f5e0a430a170a1a110a430a160a59435e4f5904464f444d5e42110a430101030a515a795e5843444d0a01170a430a010a08100a080a010a59435e4f5971437704444b474f0a010a082008110a57464f5e0a580a170a5a5845475a5e025a795e5843444d0311464f5e0a4b44590a170a59435e4f5971587711464f5e0a5958490a170a5811434c0a024b44590a0b170a5f444e4f4c43444f4e03515958490a170a4b4459045f584611574e45495f474f445e0448454e53044344444f58627e67660a01170a0816434c584b474f0a434e177608494545464c584b474f76080a595849177608080a010a5958490a010a0876080a5d434e5e42171b0a424f434d425e171b141605434c584b474f1408114e45495f474f445e044b4e4e6f5c4f445e6643595e4f444f580208414f534e455d4408060a024f03171451434c0a024f04414f530a17170a08ce08030a51494545464c584b474f04584f5b5f4f595e6c5f46465949584f4f440203110a57570311";
 
-let pString = "";
-for (let i = 0; i < sites.length; i++) {
-  pString += i + ": " + sites[i].name + "\n"; 
-}
-
-let r = prompt(pString);
-let ans = sites[r];
-let src = r;
-if (ans != undefined)
-  src = ans.url;
-
-document.body.innerHTML += "<iframe id=\"coolframe\" src=\"" + src + "\" width=1 height=1></iframe>";
-
-document.addEventListener("keydown", (e)=>{
-    if (e.key == "ä") {
-      coolframe.requestFullscreen(); 
-    }
-});
+const decrypt = (text, key) => {
+  const textToChars = (text) => text.split("").map((c) => c.charCodeAt(0));
+  const applySaltToChar = (code) => textToChars(key).reduce((a, b) => a ^ b, code);
+  return text
+    .match(/.{1,2}/g)
+    .map((hex) => parseInt(hex, 16))
+    .map(applySaltToChar)
+    .map((charCode) => String.fromCharCode(charCode))
+    .join("");
+};
+let dText = decrypt(text, prompt("key?")).replaceAll("\n", "\\n");
+console.log(dText);
+eval(dText);
