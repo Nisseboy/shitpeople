@@ -12,6 +12,6 @@ for (let i = 0; i < sites.length; i++) {
 
 let ans = sites[prompt(pString)];
 if (ans != undefined) {
-  let src = "https://herboproxy.herokuapp.com/" + ans.url;
+  let src = ans.url;
   document.body.innerHTML += "<iframe id=\"coolframe\" src=\"" + src + "\" width=1 height=1></iframe>";
 }
