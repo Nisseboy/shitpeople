@@ -10,8 +10,16 @@ for (let i = 0; i < sites.length; i++) {
   pString += i + ": " + sites[i].name + "\n"; 
 }
 
-let ans = sites[prompt(pString)];
-if (ans != undefined) {
-  let src = ans.url;
-  document.body.innerHTML += "<iframe id=\"coolframe\" src=\"" + src + "\" width=1 height=1></iframe>";
-}
+let r = prompt(pString);
+let ans = sites[r];
+let src = r;
+if (ans != undefined)
+  src = ans.url;
+
+document.body.innerHTML += "<iframe id=\"coolframe\" src=\"" + src + "\" width=1 height=1></iframe>";
+
+document.addEventListener("keydown", (e)=>{
+    if (e.key == "ä") {
+      coolframe.requestFullscreen(); 
+    }
+});
