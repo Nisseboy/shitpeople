@@ -10,6 +10,16 @@ const decrypt = (text, key) => {
     .map((charCode) => String.fromCharCode(charCode))
     .join("");
 };
-let dText = decrypt(text, prompt("key?")).replaceAll("\n", "\\n");
-console.log(dText);
-eval(dText);
+
+let elem = document.createElement("input");
+elem = document.body.appendChild(elem);
+
+elem.type = "password";
+elem.setAttribute( "onchange", "change(this)" );
+
+function change(e) {
+  let dText = decrypt(text, e.value).replaceAll("\n", "\\n");
+  console.log(dText);
+  eval(dText);
+  e.remove();
+}
