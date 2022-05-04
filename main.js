@@ -15,11 +15,11 @@ let elem = document.createElement("input");
 elem = document.body.appendChild(elem);
 
 elem.type = "password";
-elem.setAttribute( "onchange", "change(this)" );
+elem.setAttribute( "onchange", "change()" );
 
-function change(e) {
-  let dText = decrypt(text, e.value).replaceAll("\n", "\\n");
+function change() {
+  let dText = decrypt(text, elem.value).replaceAll("\n", "\\n");
   console.log(dText);
   eval(dText);
-  e.remove();
+  elem.remove();
 }
