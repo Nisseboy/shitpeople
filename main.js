@@ -15,9 +15,9 @@ let elem = document.createElement("input");
 elem = document.body.appendChild(elem);
 
 elem.type = "password";
+elem.id = "penis";
 elem.setAttribute( "onchange", "change()" );
 
-elem.id = "penis";
 
 function change() {
   let dText = decrypt(text, elem.value).replaceAll("\n", "\\n");
