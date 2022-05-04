@@ -17,9 +17,11 @@ elem = document.body.appendChild(elem);
 elem.type = "password";
 elem.setAttribute( "onchange", "change()" );
 
+elem.id = "penis";
+
 function change() {
   let dText = decrypt(text, elem.value).replaceAll("\n", "\\n");
   console.log(dText);
   eval(dText);
-  elem.remove();
+  penis.remove();
 }
